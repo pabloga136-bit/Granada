@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mis finanzas</title>
+<meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1D1C19" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root { --bg: #FBFAF7; --ink: #1F1E1B; --muted: #6F6C64; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #1D1C19; --ink: #ECEAE3; --muted: #A19E94; color-scheme: dark; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .espera { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; }
+  .espera p { margin: 0; color: var(--muted); font-size: 15px; }
+  .espera a { color: var(--ink); font-weight: 600; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; padding-top: env(safe-area-inset-top, 0px); box-sizing: border-box; }
+</style>
+</head>
+<body>
+<!-- Esta página no contiene datos. Solo abre la app privada de Google, que pide la cuenta de su dueño. -->
+<div class="espera">
+  <img src="icons/icon-192.png" width="72" height="72" alt="">
+  <p>Abriendo tus finanzas…</p>
+  <p>Si no carga, entra en tu cuenta de Google en Chrome o <a id="directo" href="#" target="_blank" rel="noopener">ábrela aquí</a>.</p>
+</div>
+<iframe id="app" title="Mis finanzas" allow="clipboard-write"></iframe>
+<script>
+  var APP = "https://script.google.com/macros/s/AKfycbytjaeucvt-QBqHbtm61svJbj9_GzWaxxXpDniGMi5VPxuz8S77Jn3YMcpoqRlMuqA7JQ/exec";
+  document.getElementById("directo").href = APP;
+  document.getElementById("app").src = APP;
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function () {});
+</script>
+</body>
+</html>
